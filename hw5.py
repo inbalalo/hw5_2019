@@ -46,7 +46,6 @@ class QuestionnaireAnalysis:
         ans = (distribution[0],distribution[1])
         return ans
 
-        #return np.histogram(a, bins=10, range=(0.0, 100.0))
     def check_if_email_is_valid(self,email) -> bool:
         pattern = re.compile(r"\"?([-a-zA-Z0-9.`?{}]+@\w+\.\w+)\"?")
         if not re.match(pattern, email):
@@ -89,6 +88,9 @@ class QuestionnaireAnalysis:
         the subject is above 40 years of age, and the average score in each of
         the five questions.
         """
+        multi_df = self.data.loc[:,['gender','age','q1','q2','q3','q4','q5']]
+        multi_df = multi_df.groupby(['gender',multi_df.age>40]).mean()
+        return multi_df
 
 
 

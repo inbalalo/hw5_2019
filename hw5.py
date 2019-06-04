@@ -41,8 +41,8 @@ class QuestionnaireAnalysis:
         distribution = plt.hist(ages, bins=10, range=(0.0, 100.0))
         plt.ylabel('Number of subjects')
         plt.xlabel('Age Groups')
-        plt.legend('Number of subjects per age group')
-        #plt.show(distribution)
+        plt.title('Number of subjects per age group')
+        plt.show()
         ans = (distribution[0],distribution[1])
         return ans
 
@@ -80,6 +80,16 @@ class QuestionnaireAnalysis:
         self.data.loc[:, 'q1':'q5'].fillna(self.data.loc[:, 'q1':'q5'].mean(axis=1))
         generated_indices = np.where(booleans)
         return self.data, np.array(generated_indices)[0]
+
+    def correlate_gender_age(self) -> pd.DataFrame:
+        """
+        Looks for a correlation between the gender of the subject, their age
+        and the score for all five questions.
+        Returns a DataFrame with a MultiIndex containing the gender and whether
+        the subject is above 40 years of age, and the average score in each of
+        the five questions.
+        """
+
 
 
 # if __name__ == "__main__":
